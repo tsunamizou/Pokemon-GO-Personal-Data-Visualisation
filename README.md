@@ -40,10 +40,61 @@ The first notebook focuses on making the raw export usable and safe:
 
 ## Spatial aggregation with H3 hexes (Notebook 02)
 
+This visualization uses H3 hexagons to reveal spatial patterns of play in Pokémon GO:
+- Hexagons represent areas of roughly equal size (set by H3 resolution).
+- Darker hexes indicate a higher number of spins in that area.
+- Tooltips show:
+  - Number of spins (spin_count)
+  - Number of unique PokéStops (pokestop_count)
+  - Spins per stop (spins_per_stop)
+
+Even at this level of abstraction:
+- Long-term home locations become obvious
+- Daily routines emerge immediately
+- Travel history across cities and countries is trivial to reconstruct
 
 
-## Timeline animation (Notebook 03)
+## Timeline animations (Notebook 03)
 
+This notebook explores temporal dynamics of Pokémon GO activity, moving beyond static hex maps to show when and where PokéStops were visited.
+
+### Basic Timeline Animation
+
+Each PokéStop visit is plotted as a dot on a map in the order it occurred and using Folium’s TimestampedGeoJson plugin for interactive playback. It allows viewers to see the flow of movement over time and demonstrates how even a short window of data can reveal travel patterns and routines.
+
+Features:
+- Play/pause and slider to explore time
+- Auto-centering on the map based on mean player location
+- Optional tooltips with visit timestamp
+
+### Enhanced Timeline Animation with Hex Heatmap Overlay
+
+- Combines the raw timeline dots with H3 hex heatmaps, showing cumulative activity per hex.
+- Hex intensity darkens as more spins accumulate.
+- Unique PokéStops per hex are displayed as numbers inside the hexagon.
+- Trail of points fades quickly to avoid clutter and emphasize recent activity.
+- Fixed map extents and aspect ratio ensure the map doesn’t zoom in/out between frames.
+- Map tiles provide spatial context without distorting scale.
+
+How it works:
+
+1. Convert raw data into a GeoDataFrame in Web Mercator (EPSG:3857) for compatibility with contextily tiles.
+2. Precompute fixed map bounds to prevent zooming during animation.
+3. Maintain a cumulative dictionary of hex info:
+ - count: total spins per hex
+ - forts: set of unique PokéStops visited
+4. For each frame:
+  - Draw hex polygons with alpha proportional to spin count
+  - Annotate hexes with number of unique PokéStops
+  - Plot a fading trail of recent raw visits
+  - Overlay map tiles for context
+5. Export all frames as a GIF for easy sharing.
+
+Key visualization benefits:
+- Shows both spatial density (hex heatmap) and temporal sequence (raw dot trail)
+- Highlights how even aggregated data can reveal patterns of movement and sensitive locations
+- Demonstrates the power of location data with minimal input
+- Tip: Adjust trail_length, H3 resolution, or colormap to explore different temporal and spatial scales.
 
 
 ## Privacy & GDPR considerations

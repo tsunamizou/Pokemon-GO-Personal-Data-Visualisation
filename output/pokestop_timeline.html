@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ef185a6455e39b18917665e3ce8f131c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ef185a6455e39b18917665e3ce8f131c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ef185a6455e39b18917665e3ce8f131c = L.map(
+                "map_ef185a6455e39b18917665e3ce8f131c",
+                {
+                    center: [43.04268459820172, 141.3415507400589],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b019b10527e6da4c3a3cfb5797759b4c = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b019b10527e6da4c3a3cfb5797759b4c.addTo(map_ef185a6455e39b18917665e3ce8f131c);
+        
+    
+            L.Control.TimeDimensionCustom = L.Control.TimeDimension.extend({
+                _getDisplayDateFormat: function(date){
+                    var newdate = new moment(date);
+                    console.log(newdate)
+                    return newdate.format("YYYY/MM/DD HH:mm:ss");
+                }
+            });
+            map_ef185a6455e39b18917665e3ce8f131c.timeDimension = L.timeDimension(
+                {
+                    period: "PT30M",
+                }
+            );
+            var timeDimensionControl = new L.Control.TimeDimensionCustom(
+                {
+  "position": "bottomleft",
+  "minSpeed": 0.1,
+  "maxSpeed": 15,
+  "autoPlay": true,
+  "loopButton": true,
+  "timeSliderDragUpdate": true,
+  "speedSlider": true,
+  "playerOptions": {
+  "transitionTime": 100,
+  "loop": false,
+  "startOver": true,
+},
+}
+            );
+            map_ef185a6455e39b18917665e3ce8f131c.addControl(this.timeDimensionControl);
+
+            var geoJsonLayer = L.geoJson({"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.566068, 42.969594]}, "properties": {"time": "2022-12-26T10:13:52.990000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:13:52.990000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.566068, 42.969594]}, "properties": {"time": "2022-12-26T10:13:55.191000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:13:55.191000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-26T10:14:42.225000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:14:42.225000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-26T10:14:49.496000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:14:49.496000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-26T10:14:58.516000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:14:58.516000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-26T10:15:21.221000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:15:21.221000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-26T10:15:30.585000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:15:30.585000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.476359, 43.037969]}, "properties": {"time": "2022-12-26T10:23:16.048000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:23:16.048000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.476359, 43.037969]}, "properties": {"time": "2022-12-26T10:23:21.200000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 10:23:21.200000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.352805, 43.066917]}, "properties": {"time": "2022-12-26T12:29:54.122000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 12:29:54.122000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.352805, 43.066917]}, "properties": {"time": "2022-12-26T12:30:01.343000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 12:30:01.343000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.352805, 43.066917]}, "properties": {"time": "2022-12-26T12:37:10.843000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 12:37:10.843000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.352805, 43.066917]}, "properties": {"time": "2022-12-26T12:37:31.027000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 12:37:31.027000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-26T15:28:49.457000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 15:28:49.457000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.345302, 43.053498]}, "properties": {"time": "2022-12-26T19:11:32.432000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 19:11:32.432000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.350397, 43.05032]}, "properties": {"time": "2022-12-26T19:15:10.390000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 19:15:10.390000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-26T20:42:45.058000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 20:42:45.058000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-26T20:56:00.015000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-26 20:56:00.015000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-27T10:01:54.105000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:01:54.105000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.341808, 43.067742]}, "properties": {"time": "2022-12-27T10:20:32.622000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:20:32.622000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.310407, 43.08128]}, "properties": {"time": "2022-12-27T10:24:43.678000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:24:43.678000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.310407, 43.08128]}, "properties": {"time": "2022-12-27T10:25:32.989000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:25:32.989000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.305305, 43.084459]}, "properties": {"time": "2022-12-27T10:26:16.475000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:26:16.475000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.295097, 43.090815]}, "properties": {"time": "2022-12-27T10:27:10.739000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:27:10.739000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.279779, 43.100349]}, "properties": {"time": "2022-12-27T10:30:07.785000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:30:07.785000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.279779, 43.100349]}, "properties": {"time": "2022-12-27T10:30:20.441000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:30:20.441000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.238107, 43.12023]}, "properties": {"time": "2022-12-27T10:45:58.434000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:45:58.434000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.24401, 43.122594]}, "properties": {"time": "2022-12-27T10:46:02.484000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:46:02.484000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.238107, 43.12023]}, "properties": {"time": "2022-12-27T10:47:54.328000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:47:54.328000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.238107, 43.12023]}, "properties": {"time": "2022-12-27T10:47:59.491000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 10:47:59.491000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.212141, 43.094151]}, "properties": {"time": "2022-12-27T16:31:08.571000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 16:31:08.571000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-27T19:04:46.386000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 19:04:46.386000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-27T19:10:46.053000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-27 19:10:46.053000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-28T08:20:29.223000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 08:20:29.223000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.364876, 43.035255]}, "properties": {"time": "2022-12-28T09:40:16.316000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:40:16.316000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.369163, 43.026549]}, "properties": {"time": "2022-12-28T09:41:42.590000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:41:42.590000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.368359, 43.021022]}, "properties": {"time": "2022-12-28T09:42:44.276000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:42:44.276000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.368359, 43.021022]}, "properties": {"time": "2022-12-28T09:42:50.227000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:42:50.227000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.365948, 43.004445]}, "properties": {"time": "2022-12-28T09:46:10.177000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:46:10.177000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.358452, 42.991049]}, "properties": {"time": "2022-12-28T09:48:51.052000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 09:48:51.052000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.3333, 42.970611]}, "properties": {"time": "2022-12-28T10:12:30.319000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 10:12:30.319000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.315645, 42.963563]}, "properties": {"time": "2022-12-28T10:16:31.915000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 10:16:31.915000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.152976, 42.950457]}, "properties": {"time": "2022-12-28T13:43:10.366000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 13:43:10.366000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.166283, 42.966217]}, "properties": {"time": "2022-12-28T15:05:41.226000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:05:41.226000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.166283, 42.966217]}, "properties": {"time": "2022-12-28T15:05:54.596000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:05:54.596000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.166283, 42.966217]}, "properties": {"time": "2022-12-28T15:06:35.781000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:06:35.781000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.166283, 42.966217]}, "properties": {"time": "2022-12-28T15:06:39.338000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:06:39.338000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.358452, 42.991049]}, "properties": {"time": "2022-12-28T15:37:43.946000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:37:43.946000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.365948, 43.004445]}, "properties": {"time": "2022-12-28T15:42:20.401000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:42:20.401000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.360859, 43.007621]}, "properties": {"time": "2022-12-28T15:42:51.874000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:42:51.874000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.360859, 43.007621]}, "properties": {"time": "2022-12-28T15:43:02.411000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:43:02.411000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.367555, 43.015496]}, "properties": {"time": "2022-12-28T15:43:37.228000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:43:37.228000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.367555, 43.015496]}, "properties": {"time": "2022-12-28T15:43:42.566000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:43:42.566000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.367555, 43.015496]}, "properties": {"time": "2022-12-28T15:43:47.035000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:43:47.035000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.369163, 43.026549]}, "properties": {"time": "2022-12-28T15:46:34.212000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:46:34.212000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.375059, 43.028899]}, "properties": {"time": "2022-12-28T15:47:13.336000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:47:13.336000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.375059, 43.028899]}, "properties": {"time": "2022-12-28T15:47:16.423000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:47:16.423000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.364876, 43.035255]}, "properties": {"time": "2022-12-28T15:48:52.212000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 15:48:52.212000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.363268, 43.024199]}, "properties": {"time": "2022-12-28T17:51:32.354000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 17:51:32.354000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.363268, 43.024199]}, "properties": {"time": "2022-12-28T17:51:43.988000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 17:51:43.988000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.363268, 43.024199]}, "properties": {"time": "2022-12-28T17:51:48.488000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 17:51:48.488000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.363268, 43.024199]}, "properties": {"time": "2022-12-28T19:20:27.529000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 19:20:27.529000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.363268, 43.024199]}, "properties": {"time": "2022-12-28T19:22:43.223000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 19:22:43.223000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-28T20:30:48.809000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 20:30:48.809000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-28T20:30:53.031000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-28 20:30:53.031000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.355492, 43.047142]}, "properties": {"time": "2022-12-29T09:05:05.897000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 09:05:05.897000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.347708, 43.070096]}, "properties": {"time": "2022-12-29T10:12:05.323000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:12:05.323000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.310407, 43.08128]}, "properties": {"time": "2022-12-29T10:17:32.538000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:17:32.538000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.305305, 43.084459]}, "properties": {"time": "2022-12-29T10:19:18.189000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:19:18.189000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.238107, 43.12023]}, "properties": {"time": "2022-12-29T10:24:52.422000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:24:52.422000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.217649, 43.132937]}, "properties": {"time": "2022-12-29T10:27:43.371000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:27:43.371000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.206629, 43.133747]}, "properties": {"time": "2022-12-29T10:27:43.492000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 10:27:43.492000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.003963, 43.198816]}, "properties": {"time": "2022-12-29T12:28:40.169000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 12:28:40.169000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.003963, 43.198816]}, "properties": {"time": "2022-12-29T12:58:53.158000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 12:58:53.158000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.003963, 43.198816]}, "properties": {"time": "2022-12-29T12:59:00.667000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 12:59:00.667000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.347708, 43.070096]}, "properties": {"time": "2022-12-29T15:35:17.511000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 15:35:17.511000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.347708, 43.070096]}, "properties": {"time": "2022-12-29T15:35:54.640000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 15:35:54.640000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.526326, 43.000594]}, "properties": {"time": "2022-12-29T15:50:40.734000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 15:50:40.734000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.526326, 43.000594]}, "properties": {"time": "2022-12-29T15:50:45.665000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 15:50:45.665000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [141.561827, 42.978298]}, "properties": {"time": "2022-12-29T15:54:09.349000+09:00", "popup": "Pok\u00e9Stop visited at 2022-12-29 15:54:09.349000+09:00", "icon": "circle", "iconstyle": {"fillColor": "red", "fillOpacity": 0.6, "stroke": "false", "radius": 5}}}]}, {
+                    pointToLayer: function (feature, latLng) {
+                        if (feature.properties.icon == 'marker') {
+                            if(feature.properties.iconstyle){
+                                return new L.Marker(latLng, {
+                                    icon: L.icon(feature.properties.iconstyle)});
+                            }
+                            //else
+                            return new L.Marker(latLng);
+                        }
+                        if (feature.properties.icon == 'circle') {
+                            if (feature.properties.iconstyle) {
+                                return new L.circleMarker(latLng, feature.properties.iconstyle)
+                                };
+                            //else
+                            return new L.circleMarker(latLng);
+                        }
+                        //else
+
+                        return new L.Marker(latLng);
+                    },
+                    style: function (feature) {
+                        return feature.properties.style;
+                    },
+                    onEachFeature: function(feature, layer) {
+                        if (feature.properties.popup) {
+                        layer.bindPopup(feature.properties.popup);
+                        }
+                        if (feature.properties.tooltip) {
+                        layer.bindTooltip(feature.properties.tooltip);
+                        }
+                    }
+                })
+
+            var timestamped_geo_json_31c3e1142ab0f45f0ce57188ca064ab4 = L.timeDimension.layer.geoJson(
+                geoJsonLayer,
+                {
+                    updateTimeDimension: true,
+                    addlastPoint: true,
+                    duration: undefined,
+                }
+            ).addTo(map_ef185a6455e39b18917665e3ce8f131c);
+        
+</script>
+</html>
